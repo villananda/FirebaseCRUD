@@ -1,13 +1,11 @@
 package com.villapp.firebasecrud;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +44,8 @@ public class List extends Fragment {
 
         final ListView listView = (ListView)view.findViewById(R.id.list_item);
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseInstance.setPersistenceEnabled(true);
+//        set offline cache
+//        mFirebaseInstance.setPersistenceEnabled(true);
         mFireDbUser = mFirebaseInstance.getReference("users");
         mFireDbUser.keepSynced(true);
         mFireDbUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -67,11 +66,12 @@ public class List extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User u = adapter.getItem(position);
-                SharedPreferences sp = getActivity().getSharedPreferences("_user_", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = sp.edit();
-                edit.putString("id_", u.getUid());
-                MainActivity.viewPager.setCurrentItem(1, true);
-                MainActivity.viewPager.setVisibility(View.VISIBLE);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("_user_",u);
+
+                Intent intent = new Intent(getContext(), EditActivity.class);
+                intent.putExtra("bundle", bundle);
+                getActivity().startActivity(intent);
             }
         });
         return view;

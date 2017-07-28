@@ -64,6 +64,10 @@ public class EditActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             Toast.makeText(getBaseContext(), "Data has been updated", Toast.LENGTH_SHORT).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("uid_",uid);
+                            List listFrag = new List();
+                            listFrag.setArguments(bundle);
                             finish();
                         }
                     });

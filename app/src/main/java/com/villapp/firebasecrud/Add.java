@@ -109,6 +109,17 @@ public class Add extends Fragment {
         user.setEmail(email);
         user.setUid(userId);
 
-        mFirebaseDatabase.child(userId).setValue(user);
+        mFirebaseDatabase.child(userId).setValue(user, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                Toast.makeText(getContext(), "Data berhasil disimpan", Toast.LENGTH_SHORT).show();
+                MainActivity.viewPager.setCurrentItem(0);
+
+                String tagname = "android:switcher:"+R.id.pagerView+":"+0;
+                List listfragment = (List)getActivity().getSupportFragmentManager().findFragmentByTag(tagname);
+
+                listfragment.updateList();
+            }
+        });
     }
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,15 +66,15 @@ public class List extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                User u = adapter.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("_user_",u);
 
-                Intent intent = new Intent(getContext(), EditActivity.class);
-                intent.putExtra("bundle", bundle);
-                getActivity().startActivity(intent);
             }
         });
+        if(savedInstanceState != null) {
+            String uid_ = getArguments().getString("uid_");
+            if (!TextUtils.isEmpty(uid_)) {
+                updateList();
+            }
+        }
         return view;
     }
 
@@ -89,5 +90,21 @@ public class List extends Fragment {
             arrayUser.add(u);
         }
         return arrayUser;
+    }
+
+    public void updateList(){
+        mFireDbUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayUser = collectUsers((Map<String, User>)dataSnapshot.getValue());
+                adapter.setUsers(arrayUser);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(LOG_TAG, databaseError.getMessage());
+            }
+        });
     }
 }

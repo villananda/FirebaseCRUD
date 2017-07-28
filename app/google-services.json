@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "74346668666",
+    "firebase_url": "https://location-fb38a.firebaseio.com",
+    "project_id": "location-fb38a",
+    "storage_bucket": "location-fb38a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74346668666:android:92bf88298e0ba8ec",
+        "android_client_info": {
+          "package_name": "com.villapp.firebasecrud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74346668666-dr9eq5pbb8e6mp1j8tu4n9q3fiut6ub7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.villapp.firebasecrud",
+            "certificate_hash": "834af337a2d213bffc5bb9de9a8091613a4e100d"
+          }
+        },
+        {
+          "client_id": "74346668666-2c4k27e2s3suvpqcr0vomjaiuhsotvi4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjTtIgLe8X8YanvR-KWpyNoPKFZllvfvg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74346668666-2c4k27e2s3suvpqcr0vomjaiuhsotvi4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
